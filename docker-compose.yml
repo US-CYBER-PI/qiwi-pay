@@ -46,10 +46,35 @@ services:
       - PORT=9096
       - AEROSPIKE_HOST=aerospike
       - AEROSPIKE_PORT=3000
+      - PG_USER=root
+      - PG_PASSWORD=root_pg
+      - PG_HOST=pg_db
+      - PG_DB=qiwi-pay
+      - PG_USER_TABLE=users
+      - PG_LOGIN_FIELD=login
     networks:
       - qiwi-pay-network
     depends_on:
       - aerospike
+
+  pg_db:
+    image: postgres:13.4
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root_pg
+      - POSTGRES_DB=qiwi-pay
+    volumes:
+      - db_pg_qiwi:/var/lib/postgresql/data/
+      - ./docker/pgsql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "2"
+    container_name: pg_db
+    networks:
+      - qiwi-pay-network
 
   aerospike:
     container_name: aerospike
@@ -62,3 +87,6 @@ services:
 networks:
   qiwi-pay-network:
     driver: bridge
+
+volumes:
+  db_pg_qiwi:
