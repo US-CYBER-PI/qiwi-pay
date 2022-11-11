@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/default.debug.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - qiwi-pay-network
+    depends_on:
+      - jwt-server
+
+  jwt-server:
+    build:
+      context: JwtServer
+      dockerfile: jwt.dockerfile
+    container_name: jwt-server
+    restart: always
+    environment:
+      - PORT=9096
+      - AEROSPIKE_HOST=aerospike
+      - AEROSPIKE_PORT=3000
+    networks:
+      - qiwi-pay-network
+    depends_on:
+      - aerospike
+
+  aerospike:
+    container_name: aerospike
+    image: aerospike/aerospike-server
+    restart: always
+    networks:
+      - qiwi-pay-network
+
+
+networks:
+  qiwi-pay-network:
+    driver: bridge
