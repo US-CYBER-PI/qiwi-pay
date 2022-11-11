@@ -1,0 +1,4 @@
+[submodule "jwt-server"]
+	path = jwt-server
+	url = https://github.com/US-CYBER-PI/jwt-server
+	branch = master
