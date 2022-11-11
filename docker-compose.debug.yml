@@ -18,7 +18,7 @@ services:
 
   jwt-server:
     build:
-      context: JwtServer
+      context: jwt-server
       dockerfile: jwt.dockerfile
     container_name: jwt-server
     restart: always
