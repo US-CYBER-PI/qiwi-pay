@@ -6,3 +6,7 @@
 	path = merchant-server
 	url = https://github.com/US-CYBER-PI/merchant-server.git
 	branch = master
+[submodule "client-server"]
+	path = client-server
+	url = https://github.com/US-CYBER-PI/client-server.git
+	branch = master

@@ -56,6 +56,24 @@ services:
     depends_on:
       - pg_db
 
+  client-server:
+    build:
+      context: client-server
+      dockerfile: client.dockerfile
+    container_name: client-server
+    restart: always
+    environment:
+      - PORT=9096
+      - PG_USER=root
+      - PG_PASSWORD=root_pg
+      - PG_HOST=pg_db
+      - PG_DB=qiwi-pay
+      - PG_USER_TABLE=users
+    networks:
+      - qiwi-pay-network
+    depends_on:
+      - pg_db
+
   aerospike:
     container_name: aerospike
     image: aerospike/aerospike-server
