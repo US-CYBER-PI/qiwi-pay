@@ -51,7 +51,8 @@ services:
       - PG_HOST=pg_db
       - PG_DB=qiwi-pay
       - PG_USER_TABLE=users
-      - PG_LOGIN_FIELD=login
+      - PG_LOGIN_FIELD=phone
+      - ALLOWED_ACCESSES=qr_create:user|pays:user|bill:merchant|bill_get:merchant
     networks:
       - qiwi-pay-network
     depends_on:
