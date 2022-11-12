@@ -36,6 +36,25 @@ services:
       - qiwi-pay-network
     depends_on:
       - aerospike
+      - pg_db
+
+  merchant-server:
+    build:
+      context: merchant-server
+      dockerfile: merchant.dockerfile
+    container_name: merchant-server
+    restart: always
+    environment:
+      - PORT=9096
+      - PG_USER=root
+      - PG_PASSWORD=root_pg
+      - PG_HOST=pg_db
+      - PG_DB=qiwi-pay
+      - PG_USER_TABLE=users
+    networks:
+      - qiwi-pay-network
+    depends_on:
+      - pg_db
 
   aerospike:
     container_name: aerospike

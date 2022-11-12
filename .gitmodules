@@ -2,3 +2,7 @@
 	path = jwt-server
 	url = https://github.com/US-CYBER-PI/jwt-server
 	branch = master
+[submodule "merchant-server"]
+	path = merchant-server
+	url = https://github.com/US-CYBER-PI/merchant-server.git
+	branch = master
