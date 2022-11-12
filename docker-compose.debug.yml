@@ -51,6 +51,9 @@ services:
       - PG_HOST=pg_db
       - PG_DB=qiwi-pay
       - PG_USER_TABLE=users
+      - HMAC_SECRET=merchant_secret_client_secret
+      - QIWI_TOKEN=${QIWI_TOKEN}
+      - QIWI_SITE_ID=${QIWI_SITE_ID}
     networks:
       - qiwi-pay-network
     depends_on:
@@ -69,6 +72,9 @@ services:
       - PG_HOST=pg_db
       - PG_DB=qiwi-pay
       - PG_USER_TABLE=users
+      - HMAC_SECRET=merchant_secret_client_secret
+      - QIWI_TOKEN=${QIWI_TOKEN}
+      - QIWI_SITE_ID=${QIWI_SITE_ID}
     networks:
       - qiwi-pay-network
     depends_on:
