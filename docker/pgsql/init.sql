@@ -19,7 +19,7 @@ create table users
     phone varchar (30) not null,
     password varchar (200) not null,
     role_id int not null references roles (id),
-    token_id int references tokens (id)
+    token_id int not null references tokens (id)
 );
 
 create table payments
